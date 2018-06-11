@@ -1,0 +1,74 @@
+#! usr/bin/python
+
+import time 
+import os
+import webbrowser
+import urllib
+
+x="""
+MENU BASED ACCESS PROGRAM FOR BASIC OPERATIONS
+Press 1. : show current date and time
+Press 2. : make a dierictory/folder
+Press 3. : make a file
+Press 4. : search something on google
+Press 5. : to reboot/restart your system
+Press 6. : to logout from system
+Press 7. : to check all IPs of your network
+Press 8. : to check internet connection of your system
+Press 9. : to open your whatsapp""" 
+
+print x
+
+#takes choice from user
+choice= int(raw_input("enter your choice what you want to do:-  "))
+
+if choice==1 :
+	time=time.ctime()
+	print "current time = "+ time.split()[3]
+	print "current date = ",time.split()[0:3]
+
+elif choice==2:
+	directoryname=raw_input("enter folder name: ")
+	path="/home/q/Desktop/"+ directoryname
+	os.mkdir(path)
+
+elif choice==3:
+	filename=raw_input("enter file name: ")
+	path="/home/q/Desktop/"+ filename
+	os.mknod(path)
+
+elif choice==4:
+	datasearch=raw_input("enter data to be searched on google  ")
+	webbrowser.open_new_tab('https://www.google.com/search?q='+datasearch)
+
+elif choice==5:
+	time.sleep(2)
+	print "your system is rebooting....."
+	time.sleep(5)
+	os.system('reboot')
+
+
+elif choice==6:
+	print "Do you want to log off? (y/n) "
+#x stores choice of user whether they want to log off or not.....
+	x=raw_input()
+	if x=='y':
+		print " your system will log out"
+		time.sleep(1)
+		os.system("sudo pkill -u q") #q is username
+	else:
+		print "we'll not log off......"
+
+
+
+elif choice==8:
+	try:
+		url="https://www.google.com"
+		urllib.urlopen(url)
+		status="you are connected to internet........."
+	except:
+		status="sorry you are offline :("
+	print status
+
+else :
+	print "invalid choice"
